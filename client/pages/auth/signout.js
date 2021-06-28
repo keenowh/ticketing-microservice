@@ -12,5 +12,6 @@ export default () => {
    useEffect(() => {
       doRequest();
    }, []);
+
    return <div>Signing you out</div>;
 };
