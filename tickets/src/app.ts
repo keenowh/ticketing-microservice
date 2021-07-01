@@ -17,6 +17,7 @@ app.use(
 );
 app.use(currentUser);
 app.use(createTicketRouter);
+app.use(showTicketRouter);
 
 app.all("*", async (req, res) => {
    throw new NotFoundError();

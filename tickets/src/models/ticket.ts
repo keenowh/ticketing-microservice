@@ -30,23 +30,25 @@ const ticketSchema = new mongoose.Schema(
          type: Number,
          required: true,
       },
+      userId: {
+         type: String,
+         required: true,
+      },
    },
    {
       toJSON: {
          transform(doc, ret) {
             ret.id = ret._id;
             delete ret._id;
-            delete ret.password;
-            delete ret.__v;
          },
       },
    }
 );
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
-   return new User(attrs);
+   return new Ticket(attrs);
 };
 
-const User = mongoose.model<TicketDoc, TicketModel>("Ticket", ticketSchema);
+const Ticket = mongoose.model<TicketDoc, TicketModel>("Ticket", ticketSchema);
 
-export { User };
+export { Ticket };
