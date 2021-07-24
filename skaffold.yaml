@@ -1,36 +1,44 @@
 apiVersion: skaffold/v2alpha3
 kind: Config
 deploy:
-   kubectl:
-      manifests:
-         - ./infra/k8s/*
+    kubectl:
+        manifests:
+            - ./infra/k8s/*
 build:
-   #  local:
-   #     push: false
-   googleCloudBuild:
-      projectId: <insert id>
-   artifacts:
-      - image: us.gcr.io/<insert id>/auth
-        context: auth
-        docker:
-           dockerfile: Dockerfile
-        sync:
-           manual:
-              - src: "src/**/*.ts"
-                dest: .
-      - image: us.gcr.io/<insert id>/client
-        context: client
-        docker:
-           dockerfile: Dockerfile
-        sync:
-           manual:
-              - src: "**/*.js"
-                dest: .
-      - image: us.gcr.io/<insert id>/tickets
-        context: tickets
-        docker:
-           dockerfile: Dockerfile
-        sync:
-           manual:
-              - src: "**/*.js"
-                dest: .
+    #  local:
+    #     push: false
+    googleCloudBuild:
+        projectId: <insert id>
+    artifacts:
+        - image: us.gcr.io/<insert id>/auth
+          context: auth
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "src/**/*.ts"
+                    dest: .
+        - image: us.gcr.io/<insert id>/client
+          context: client
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "**/*.js"
+                    dest: .
+        - image: us.gcr.io/<insert id>/tickets
+          context: tickets
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "src/**/*.ts"
+                    dest: .
+        - image: us.gcr.io/<insert id>/orders
+          context: orders
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "src/**/*.ts"
+                    dest: .
