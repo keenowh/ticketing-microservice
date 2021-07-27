@@ -1,9 +1,12 @@
+import { OrderStatus } from "@sgtickets/common";
 import mongoose from "mongoose";
+import { TicketDoc } from "./ticket";
 
+export { OrderStatus };
 // Describes what should you input in order to create an Order Object
 interface OrderAttrs {
     userId: string;
-    status: string;
+    status: OrderStatus;
     expiresAt: Date;
     ticket: TicketDoc;
 }
@@ -11,12 +14,12 @@ interface OrderAttrs {
 // Describes what should the Order Object look like after inputting data
 interface OrderDoc extends mongoose.Document {
     userId: string;
-    status: string;
+    status: OrderStatus;
     expiresAt: Date;
     ticket: TicketDoc;
 }
 
-interface orderModel extends mongoose.Model<OrderDoc> {
+interface OrderModel extends mongoose.Model<OrderDoc> {
     build(attrs: OrderAttrs): OrderDoc;
 }
 
@@ -30,6 +33,8 @@ const orderSchema = new mongoose.Schema(
         status: {
             type: String,
             required: true,
+            enum: Object.values(OrderStatus),
+            default: OrderStatus.Created,
         },
         expiresAt: {
             type: mongoose.Schema.Types.Date,
