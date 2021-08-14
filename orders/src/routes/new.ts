@@ -8,7 +8,7 @@ import {
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import mongoose from "mongoose";
-import { OrderCreatedPublisher } from "../events/order-created-publisher";
+import { OrderCreatedPublisher } from "../events/publishers/order-created-publisher";
 import { Order } from "../models/order";
 import { Ticket } from "../models/ticket";
 import { natsWrapper } from "../nats-wrapper";
@@ -67,6 +67,7 @@ router.post(
                 id: ticket.id,
                 price: ticket.price,
             },
+            version: order.version,
         });
         res.status(201).send(order);
     }
