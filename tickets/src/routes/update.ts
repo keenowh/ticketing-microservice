@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { Ticket } from "../models/ticket";
 import { body } from "express-validator";
 import {
+    BadRequestError,
     NotAuthorizedError,
     NotFoundError,
     requireAuth,
@@ -33,13 +34,17 @@ router.put(
             throw new NotAuthorizedError();
         }
 
+        if (ticket.orderId) {
+            throw new BadRequestError("Ticket is already reserved");
+        }
+
         ticket.set({
             title: req.body.title,
             price: req.body.price,
         });
 
         await ticket.save();
-        await TicketUpdatedPublisher(natsWrapper.client).publish({
+        await new TicketUpdatedPublisher(natsWrapper.client).publish({
             id: ticket.id,
             title: ticket.title,
             price: ticket.price,
