@@ -1,5 +1,5 @@
 {
-    "name": "orders",
+    "name": "expiration",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -20,17 +20,8 @@
     "dependencies": {
         "@kbticketss/common": "^1.0.6",
         "@sgtickets/common": "^1.0.24",
-        "@types/cookie-session": "^2.0.42",
-        "@types/express": "^4.17.12",
-        "@types/jsonwebtoken": "^8.5.2",
-        "@types/mongoose": "^5.11.97",
-        "cookie-session": "^1.4.0",
-        "express": "^4.17.1",
-        "express-async-errors": "^3.1.1",
-        "express-validator": "^6.12.0",
-        "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.12.15",
-        "mongoose-update-if-current": "^1.4.0",
+        "@types/bull": "^3.15.3",
+        "bull": "^3.28.1",
         "node-nats-streaming": "^0.2.6",
         "ts-node-dev": "^1.1.6",
         "typescript": "^3.9.10"
