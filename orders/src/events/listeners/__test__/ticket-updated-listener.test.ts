@@ -1,13 +1,13 @@
-import { TicketCreatedEvent, TicketUpdatedEvent } from "@sgtickets/common";
+import { TicketUpdatedEvent } from "@sgtickets/common";
 import { natsWrapper } from "../../../nats-wrapper";
-import { TicketCreatedListener } from "../ticket-created-listener";
 import mongoose from "mongoose";
 import { Message } from "node-nats-streaming";
 import { Ticket } from "../../../models/ticket";
+import { TicketUpdatedListener } from "../ticket-updated-listener";
 const setup = async () => {
     // create an instanc eof the listener
 
-    const listener = new TicketCreatedListener(natsWrapper.client);
+    const listener = new TicketUpdatedListener(natsWrapper.client);
     // create and save a ticket
     const ticket = await Ticket.build({
         id: mongoose.Types.ObjectId().toHexString(),
