@@ -6,7 +6,7 @@ let mongo: any;
 declare global {
     namespace NodeJS {
         interface Global {
-            signin(): string[];
+            signin(id?: string): string[];
         }
     }
 }
@@ -37,10 +37,10 @@ afterAll(async () => {
     await mongoose.connection.close();
 });
 
-global.signin = () => {
+global.signin = (id?: string) => {
     // build a jwt payload
     const payload = {
-        id: "asasdad",
+        id: id || "asasdad",
         email: "test@test.com",
     };
 

@@ -12,17 +12,21 @@ spec:
               paths:
                   - path: /api/user/?(.*)
                     backend:
-                        serviceName: auth-serv
+                        serviceName: auth-srv
                         servicePort: 3000
                   - path: /api/orders/?(.*)
                     backend:
-                        serviceName: orders-serv
+                        serviceName: orders-srv
                         servicePort: 3000
                   - path: /api/tickets/?(.*)
                     backend:
-                        serviceName: ticket-serv
+                        serviceName: ticket-srv
+                        servicePort: 3000
+                  - path: /api/payments?(.*)
+                    backend:
+                        serviceName: payments-srv
                         servicePort: 3000
                   - path: /?(.*)
                     backend:
-                        serviceName: client-serv
+                        serviceName: client-srv
                         servicePort: 3000
