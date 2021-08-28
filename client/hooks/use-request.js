@@ -3,27 +3,28 @@ import { useState } from "react";
 
 const [errors, setErrors] = useState(null);
 export default ({ url, method, body, onSuccess }) => {
-   const doRequest = async () => {
-      try {
-         const response = await axios[method](url, body);
+    const doRequest = async (props = {}) => {
+        try {
+            setErrors(null);
+            const response = await axios[method](url, { ...body, ...props });
 
-         if (onSuccess) {
-            onSuccess(response.data);
-         }
-         return response.data;
-      } catch (err) {
-         setErrors(
-            <div className="alert alert-danger">
-               <h4></h4>
-               <ul className="my-0">
-                  {err.response.data.errors.map((err) => {
-                     <li>{err.message}</li>;
-                  })}
-               </ul>
-            </div>
-         );
-      }
-   };
+            if (onSuccess) {
+                onSuccess(response.data);
+            }
+            return response.data;
+        } catch (err) {
+            setErrors(
+                <div className="alert alert-danger">
+                    <h4></h4>
+                    <ul className="my-0">
+                        {err.response.data.errors.map((err) => {
+                            <li>{err.message}</li>;
+                        })}
+                    </ul>
+                </div>
+            );
+        }
+    };
 
-   return { doRequest, errors };
+    return { doRequest, errors };
 };
