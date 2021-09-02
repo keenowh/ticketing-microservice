@@ -3,16 +3,16 @@ import mongoose from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 interface OrderAttrs {
-    id: String;
-    version: Number;
-    userId: String;
+    id: string;
+    version: number;
+    userId: string;
     status: OrderStatus;
     price: number;
 }
 
 interface OrderDoc extends mongoose.Document {
     version: number;
-    userId: String;
+    userId: string;
     status: OrderStatus;
     price: number;
 }
